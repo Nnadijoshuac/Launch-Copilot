@@ -1,0 +1,15 @@
+{
+  "name": "launch-copilot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Launch Copilot — A2MCP ASP for OKX.AI: the agent that launches agents. Zero runtime dependencies.",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^4.113.0"
+  }
+}

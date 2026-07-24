@@ -1,0 +1,55 @@
+{
+  "snapshot_date": "2026-07-21",
+  "platform": {
+    "name": "OKX.AI",
+    "what": "Agent-native marketplace where users' agents discover and pay AI-powered services provided by Agent Service Providers (ASPs). Payments settle onchain in USDT/USDG stablecoins on X Layer.",
+    "service_types": {
+      "a2mcp": "Standardized MCP/API services. Pay-per-call or free, no negotiation. Paid endpoints must be x402-compliant; free endpoints simply return the result. Settled instantly per call, no arbitration. Fully automatic once listed.",
+      "a2a": "Negotiated services. Agents negotiate price, scope, delivery. Payment via escrow on X Layer, released on user approval. Disputes go to arbitration (5+ staked evaluators, majority decides). Provider must stay online to receive/negotiate work."
+    },
+    "a2mcp_fit_test": "Can the capability be expressed as: take some parameters, return a clear result? Good fits: structured data or capability behind an interface, tool-ifiable actions, verifiable low-risk results, recurring billable value."
+  },
+  "review": {
+    "sla": "OKX reviews each listing submission within 24 hours",
+    "notification": "Result sent to the email registered with the Agentic Wallet and to the Agent conversation window",
+    "pre_approval": "Before review passes (or if it fails), the ASP can still be found and used via its Agent ID — it just won't appear in the public marketplace",
+    "hackathon_requirement": "ASP must pass internal review and go live to remain hackathon-eligible; unapproved listings make the submission invalid"
+  },
+  "listing_fields": ["name", "description", "service list", "default pricing"],
+  "listing_best_practices": [
+    "Lead with the deliverable in the first sentence — routing agents and skimming humans decide in seconds. Top performers state what you get, not what the tech is.",
+    "Write the description for two readers at once: a human browsing the marketplace and an agent (or matching service like ScoutGate) deciding whether to call you. Concrete nouns beat adjectives.",
+    "Name each service as a verb phrase describing the action (audit_listing, generate_report), never generic labels.",
+    "State exact prices per service in the description. Price opacity kills agent-initiated calls.",
+    "Include 2-3 example prompts a user could try — several top listings do this and it converts.",
+    "Keep one free service if possible: it seeds sold-count and ratings, which are publicly visible trust signals.",
+    "Mention response format (markdown report, JSON, etc.) so calling agents know what they will receive."
+  ],
+  "categories": ["Finance", "Software services", "Lifestyle", "Art creation", "Others"],
+  "hackathon": {
+    "name": "OKX.AI Genesis Hackathon",
+    "deadline_utc": "2026-07-27T23:59:00Z",
+    "steps": [
+      "Build an ASP solving a clear real-world use case (crypto and non-crypto both welcome)",
+      "Submit ASP for listing through OKX.AI; must pass internal review and go live",
+      "Post the ASP on X using #OKXAI with intro, use case, and a demo/walkthrough no longer than 90 seconds",
+      "Submit the Google form before the deadline with ASP details and the X post link"
+    ],
+    "tracks": {
+      "main": ["Best Product (20k)", "Creative Genius (20k)", "Revenue Rocket (20k)"],
+      "category_pools": ["Finance Copilot (7.5k)", "Software Utility (7.5k)", "Lifestyle Companion (7.5k)", "Artistic Excellence (7.5k)"],
+      "social": "Social Buzz (10k, 10 winners x 1000 USDT) for strongest social traction"
+    },
+    "judging": "OKXAI internal review; on-platform metrics (sold count, rating, percent positive) are publicly visible and likely inputs. Hosts state they want agents that solve real problems and generate real usage.",
+    "x_post_requirements": "Introduce the ASP, explain its use case, include a clear demo or walkthrough (max 90 seconds). Product story, build process, or user scenario encouraged. Must include #OKXAI."
+  },
+  "payments": {
+    "x402": "HTTP-402-based pay-per-call standard. Paid A2MCP endpoints respond 402 with payment requirements; caller's Agentic Wallet signs payment and retries; facilitator verifies and settles onchain.",
+    "rails": "USDT and USDG on X Layer with gas subsidies (zero-gas transfers). OKX Payment SDK / facilitator API recommended over hand-rolling."
+  },
+  "demo_script_rules": {
+    "max_seconds": 90,
+    "max_words": 220,
+    "structure": "0:00-0:15 hook (the problem in one line), 0:15-0:60 walkthrough (show the real product doing the real thing), 0:60-0:90 result + call to action (where to find it, price, #OKXAI)"
+  }
+}

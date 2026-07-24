@@ -1,0 +1,26 @@
+# Local dev secrets — copy to .dev.vars (gitignored). In production these are
+# set with `wrangler secret put <NAME>`, never committed.
+# Primary provider is Groq; NVIDIA NIM is the fallback (flipped 2026-07-22).
+LLM_API_KEY=gsk_...            # Groq key (primary)
+LLM_FALLBACK_API_KEY=nvapi-... # NVIDIA key (fallback, used on 429/5xx/timeout)
+
+# x402 payout address — the wallet that receives USDT. Must NOT be the zero
+# address; payments to 0x000…000 are burned.
+PAY_TO_ADDRESS=0x8b91361f58980992c2eeca0410f21cc9c181ee97
+
+# OKX Onchain OS API credentials. Required for the facilitator (/supported,
+# /verify, /settle) — every call is HMAC-SHA256 signed. Without all three,
+# X402_MODE stays effectively stubbed and paid requests return 503 rather than
+# a misleading 402.
+OKX_API_KEY=
+OKX_SECRET_KEY=
+OKX_PASSPHRASE=
+
+STATS_KEY=pick-a-long-random-string
+
+# Optional local overrides of wrangler.jsonc vars:
+# X402_MODE=live                 # exercise the real facilitator path locally
+# LLM_BASE_URL=https://api.groq.com/openai/v1
+# LLM_MODEL=llama-3.3-70b-versatile
+# LLM_FALLBACK_BASE_URL=https://integrate.api.nvidia.com/v1
+# LLM_FALLBACK_MODEL=meta/llama-3.3-70b-instruct

@@ -1,0 +1,77 @@
+{
+  // Launch Copilot — A2MCP ASP for OKX.AI (Cloudflare Workers, zero runtime deps)
+  "name": "launch-copilot",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-01",
+
+  // Non-secret config. Secrets (LLM_API_KEY, LLM_FALLBACK_API_KEY,
+  // PAY_TO_ADDRESS, STATS_KEY) are set via `wrangler secret put <NAME>` —
+  // never here.
+  "vars": {
+    // X402_MODE: "stubbed" | "live". "stubbed" emits a real 402 but never
+    // calls the facilitator (payment header → 503). "live" runs the full
+    // verify → execute → settle path. See src/payments.js.
+    // Flipped to "live" 2026-07-23 after two proven testnet settlements
+    // (0xbe808fdd…c9e7, 0x3454b63d…c94b) and on-chain-verified mainnet
+    // constants. Rollback: set back to "stubbed" + deploy (MAINNET_SWITCH §10).
+    "X402_MODE": "live",
+    // OpenAI-compatible chat-completions providers (raw fetch, zero deps).
+    // Primary: Groq (fast). Fallback (used on 429/5xx/timeout): NVIDIA NIM.
+    // Flipped 2026-07-22: NVIDIA queueing tripped the 30s timeout on every
+    // call while Groq answered in 2-3s (see BUILD_NOTES.md §3.5).
+    // LLM_API_KEY secret = Groq key; LLM_FALLBACK_API_KEY secret = NVIDIA key.
+    "LLM_BASE_URL": "https://api.groq.com/openai/v1",
+    "LLM_MODEL": "llama-3.3-70b-versatile",
+    "LLM_FALLBACK_BASE_URL": "https://integrate.api.nvidia.com/v1",
+    "LLM_FALLBACK_MODEL": "meta/llama-3.3-70b-instruct",
+    // x402 / OKX payment config.
+    "FACILITATOR_BASE": "https://web3.okx.com/api/v6/pay/x402",
+    // Settlement chain: "mainnet" (eip155:196, USD₮0) or "testnet"
+    // (eip155:1952, xlayer_test). Network + asset + EIP-712 domain all come
+    // from the matching profile in src/chains.js — this is the only switch.
+    // Mainnet values verified 2026-07-22 against /supported and the OKX token
+    // registry; testnet asset must be supplied via X402_ASSET_OVERRIDE.
+    "X402_CHAIN": "mainnet",
+    "FREE_TOOL_DAILY_LIMIT": "10"
+  },
+
+  // Optional: stats + rate limiting. Create with:
+  //   npx wrangler kv namespace create STATS
+  // then paste the returned id below. The worker runs fine without it
+  // (stats/rate-limit silently disabled).
+  "kv_namespaces": [
+    { "binding": "STATS", "id": "679a001f3e0549868dc5910503aa56c9" }
+  ],
+
+  "observability": { "enabled": true },
+
+  // ---------------------------------------------------------------------
+  // PREVIEW / TESTNET environment — a SEPARATE worker used to rehearse the
+  // real x402 payment flow on X Layer testnet. It never touches production:
+  // different worker name, different URL, no KV binding (so test traffic can
+  // never pollute the /stats Revenue Rocket evidence), and ASP #7225 is not
+  // re-registered against it.
+  //
+  //   deploy : npx wrangler deploy --env preview
+  //   secrets: npx wrangler secret put <NAME> --env preview
+  //
+  // Wrangler does NOT inherit `vars` into a named environment, so the full
+  // block is repeated here with the two payment settings changed.
+  // ---------------------------------------------------------------------
+  "env": {
+    "preview": {
+      "name": "launch-copilot-testnet",
+      "vars": {
+        "X402_MODE": "live",
+        "X402_CHAIN": "testnet",
+        "LLM_BASE_URL": "https://api.groq.com/openai/v1",
+        "LLM_MODEL": "llama-3.3-70b-versatile",
+        "LLM_FALLBACK_BASE_URL": "https://integrate.api.nvidia.com/v1",
+        "LLM_FALLBACK_MODEL": "meta/llama-3.3-70b-instruct",
+        "FACILITATOR_BASE": "https://web3.okx.com/api/v6/pay/x402",
+        "FREE_TOOL_DAILY_LIMIT": "100"
+      },
+      "observability": { "enabled": true }
+    }
+  }
+}

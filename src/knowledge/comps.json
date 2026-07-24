@@ -1,0 +1,24 @@
+{
+  "snapshot_date": "2026-07-21",
+  "source": "okx.ai/agents public marketplace listings",
+  "notes": "Refresh daily during the hackathon: update entries, bump snapshot_date, redeploy.",
+  "agents": [
+    { "name": "PixelBrief", "category": "Art creation", "positioning": "One prompt to a complete brand kit: logo SVG, palette, fonts, social posts, thumbnail brief", "price_usdt": 0.02, "sold": 10110, "rating": 4.8, "positive_pct": 96.88, "lesson": "Micro-pricing + broad appeal + instant deliverable = the volume king of the marketplace" },
+    { "name": "ScoutGate", "category": "Software services", "positioning": "Helps users' AI match and compare services within OKX.AI, separating provider claims from verified evidence", "price_usdt": 0, "sold": 1630, "rating": 5.0, "positive_pct": 100, "lesson": "Free + platform-native utility earns volume and a perfect rating; it is also the router other agents may consult" },
+    { "name": "Onchain Data Explorer", "category": "Finance", "positioning": "One prompt, agent reads 180 chains", "price_usdt": null, "sold": 1590, "rating": 4.86, "positive_pct": 92.86, "lesson": "Broad data coverage headline; sold count driven by being a dependency for other workflows" },
+    { "name": "CoinAnk OpenAPI", "category": "Finance", "positioning": "Crypto derivatives data engine: 80 market data APIs (klines, ETF flows, funding, liquidations, whale tracking)", "price_usdt": 0.01, "sold": 1530, "rating": 5.0, "positive_pct": 100, "lesson": "Near-free per-call pricing on a data API drives high call volume from other agents" },
+    { "name": "Lumora Stock Data Hub", "category": "Finance", "positioning": "Free recent 1-min US equity bars; paid limited historical OHLCV via standardized API", "price_usdt": 0, "sold": 636, "rating": 5.0, "positive_pct": 100, "lesson": "Freemium split: free recent data, paid historical depth" },
+    { "name": "Newsliquid", "category": "Finance", "positioning": "Every signal, before it moves the market", "price_usdt": null, "sold": 499, "rating": 5.0, "positive_pct": 100, "lesson": "Sharp one-line positioning; featured placement" },
+    { "name": "Healthy Lifestyle", "category": "Lifestyle", "positioning": "Your diet and workout. AI handles both.", "price_usdt": null, "sold": 274, "rating": null, "positive_pct": null, "lesson": "Non-crypto lifestyle services get featured placement; the shelf is thin" },
+    { "name": "WorldCupCaller", "category": "Lifestyle", "positioning": "2026 World Cup schedules, win probabilities, likely scores, Polymarket links; pulls live data before each response", "price_usdt": 0.5, "sold": 174, "rating": 4.7, "positive_pct": 96.05, "lesson": "Timely event angle at 0.5 USDT; demand decays with the event" },
+    { "name": "商业后台 · Dawning", "category": "Software services", "positioning": "AI business backend for solo founders: structured business report (diagnosis, market, competitors, finance, action checklist)", "price_usdt": 1, "sold": 128, "rating": 5.0, "positive_pct": 100, "lesson": "1 USDT is a proven price for a substantial structured report deliverable" },
+    { "name": "SoulMirror", "category": "Others", "positioning": "Translates wallet history into plain language, weekly trends, pre-trade pattern warnings, wallet personality matching", "price_usdt": 0.5, "sold": 63, "rating": 4.8, "positive_pct": 98.25, "lesson": "Creative, emotionally clever platform-native concept; example prompts in the listing" },
+    { "name": "World Cup Alpha", "category": "Finance", "positioning": "Scans thousands of betting wallets to surface the 50 genuinely profitable ones and their strategies", "price_usdt": 1, "sold": 57, "rating": 4.7, "positive_pct": 91.67, "lesson": "1 USDT for analysis over many data points; niche caps volume" }
+  ],
+  "pricing_bands": {
+    "data_api_per_call": "0.01-0.05 USDT (CoinAnk model: volume via other agents)",
+    "quick_analysis": "0.2-0.5 USDT (SoulMirror, WorldCupCaller band)",
+    "substantial_report": "0.5-1 USDT (Dawning, World Cup Alpha band)",
+    "free_funnel": "0 USDT free tier is common among top-rated listings and seeds sold-count"
+  }
+}
